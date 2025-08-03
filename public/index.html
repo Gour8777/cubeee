@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- ✅ Disable Strict CORS for OpenCV.js + Camera/WebAssembly -->
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
+
+    <!-- General Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Rubik's Cube Solver using React + OpenCV.js" />
+
+    <!-- Icons & Manifest -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>Rubik’s Cube Solver</title>
+
+    <!-- ✅ Load OpenCV.js from local public/js folder -->
+    <script
+      async
+      src="%PUBLIC_URL%/js/opencv.js"
+      onload="cv['onRuntimeInitialized']=()=>{ console.log('✅ OpenCV.js loaded successfully'); }"
+      onerror="console.error('❌ Failed to load OpenCV.js');"
+    ></script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
