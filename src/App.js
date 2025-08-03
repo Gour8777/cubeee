@@ -100,6 +100,22 @@ function AppContent() {
                 >
                   🎲 Virtual Cube
                 </button>
+                <a 
+                  href="https://rubiks-new-five.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-button play-game-button"
+                  style={{
+                    background: 'linear-gradient(45deg, #4CAF50, #45a049)',
+                    color: 'white',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}
+                >
+                  🎮 Play Game
+                </a>
               </div>
             </div>
 
@@ -131,7 +147,6 @@ function AppContent() {
                       </div>
                       <VirtualCube 
                         cubeData={capturedCubeData} 
-                        onRecapture={() => setActiveTab('camera')}
                         onColorChange={(updatedCubeData) => setCapturedCubeData(updatedCubeData)}
                       />
                       <div className="start-button-container">

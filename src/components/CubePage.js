@@ -468,65 +468,10 @@ const CubePage = ({ cubeData, onBack }) => {
             e.target.style.boxShadow = '0 3px 8px rgba(0, 0, 0, 0.2)';
           }}
         >
-          {isSolving ? '🛑 Stop' : '🔄 Rotate & Reset'}
+          {isSolving ? '🛑 Stop' : '▶️ Start'}
         </button>
 
-        {/* Test Move Buttons */}
-        <div style={{
-          marginTop: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '8px'
-        }}>
-          <button
-            onClick={() => executeSingleMove('R')}
-            disabled={isSolving}
-            style={{
-              padding: '8px 12px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              color: 'white',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '8px',
-              fontSize: '0.8rem',
-              cursor: isSolving ? 'not-allowed' : 'pointer',
-              opacity: isSolving ? 0.5 : 1
-            }}
-          >
-            Test: R
-          </button>
-          <button
-            onClick={() => executeSingleMove('U')}
-            disabled={isSolving}
-            style={{
-              padding: '8px 12px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              color: 'white',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '8px',
-              fontSize: '0.8rem',
-              cursor: isSolving ? 'not-allowed' : 'pointer',
-              opacity: isSolving ? 0.5 : 1
-            }}
-          >
-            Test: U
-          </button>
-          <button
-            onClick={() => executeMoveSequence(['R', 'U', 'R\'', 'U\''])}
-            disabled={isSolving}
-            style={{
-              padding: '8px 12px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              color: 'white',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '8px',
-              fontSize: '0.8rem',
-              cursor: isSolving ? 'not-allowed' : 'pointer',
-              opacity: isSolving ? 0.5 : 1
-            }}
-          >
-            Test: R U R' U'
-          </button>
-        </div>
+
       </div>
 
       {/* Solving Progress Indicator */}

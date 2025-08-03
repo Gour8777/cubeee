@@ -419,146 +419,10 @@ const RubiksCube = ({ cubeData, onFaceClick, currentMove, animationSpeed = 1, on
 };
 
 // Enhanced CubeControls component
-const CubeControls = ({
-  onScramble,
-  onSolve,
-  onReset,
-  onSpeedChange,
-  isScrambling,
-  isSolving,
-  animationSpeed,
-  solvingMoves,
-  currentMoveIndex
-}) => {
-  const isDisabled = isScrambling || isSolving;
 
-  return (
-    <div className="space-y-4">
-      {/* Main Controls */}
-      <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4">
-        <h3 className="text-white font-semibold mb-4 flex items-center">
-          <span className="mr-2">🎮</span>
-          Cube Controls
-        </h3>
-        
-        <div className="space-y-3">
-          <button
-            onClick={onScramble}
-            disabled={isDisabled}
-            className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:opacity-50 transition-all duration-300 transform hover:scale-105 px-4 py-2 rounded-lg text-white font-medium"
-          >
-            🔀 {isScrambling ? 'Scrambling...' : 'Scramble Cube'}
-          </button>
-
-          <button
-            onClick={onSolve}
-            disabled={isDisabled}
-            className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 disabled:opacity-50 transition-all duration-300 transform hover:scale-105 px-4 py-2 rounded-lg text-white font-medium"
-          >
-            ▶️ {isSolving ? 'Solving...' : 'Start Solving'}
-          </button>
-
-          <button
-            onClick={onReset}
-            disabled={isDisabled}
-            className="w-full border border-slate-600 text-slate-300 hover:bg-slate-700 disabled:opacity-50 transition-all duration-300 px-4 py-2 rounded-lg font-medium"
-          >
-            🔄 Reset Cube
-          </button>
-        </div>
-      </div>
-
-      {/* Animation Speed Control */}
-      <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4">
-        <h3 className="text-white font-semibold mb-4 flex items-center">
-          <span className="mr-2">⚡</span>
-          Animation Speed
-        </h3>
-        
-        <div className="space-y-3">
-          <div className="flex justify-between text-sm text-slate-400">
-            <span>Slow</span>
-            <span className="text-cyan-400 font-medium">{animationSpeed}x</span>
-            <span>Fast</span>
-          </div>
-          <input
-            type="range"
-            value={animationSpeed}
-            onChange={(e) => onSpeedChange(parseFloat(e.target.value))}
-            max={3}
-            min={0.5}
-            step={0.1}
-            className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer"
-          />
-        </div>
-      </div>
-
-      {/* Solving Progress */}
-      {solvingMoves && solvingMoves.length > 0 && (
-        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4">
-          <h3 className="text-white font-semibold mb-4">Solving Progress</h3>
-          
-          <div className="space-y-3">
-            <div className="flex justify-between text-sm">
-              <span className="text-slate-400">Progress</span>
-              <span className="text-cyan-400 font-medium">
-                {currentMoveIndex + 1} / {solvingMoves.length}
-              </span>
-            </div>
-            
-            <div className="w-full bg-slate-700 rounded-full h-2">
-              <div
-                className="bg-gradient-to-r from-cyan-500 to-purple-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentMoveIndex + 1) / solvingMoves.length) * 100}%` }}
-              ></div>
-            </div>
-
-            <div className="flex flex-wrap gap-1">
-              {solvingMoves.slice(0, 10).map((move, index) => (
-                <span
-                  key={index}
-                  className={`text-xs px-2 py-1 rounded ${
-                    index <= currentMoveIndex
-                      ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white'
-                      : 'border border-slate-600 text-slate-400'
-                  }`}
-                >
-                  {move.notation}
-                </span>
-              ))}
-              {solvingMoves.length > 10 && (
-                <span className="text-xs px-2 py-1 rounded border border-slate-600 text-slate-400">
-                  +{solvingMoves.length - 10}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Status */}
-      <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4">
-        <div className="text-center">
-          <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-            isScrambling ? 'bg-orange-500/20 text-orange-400' :
-            isSolving ? 'bg-green-500/20 text-green-400' :
-            'bg-blue-500/20 text-blue-400'
-          }`}>
-            <div className={`w-2 h-2 rounded-full mr-2 ${
-              isScrambling ? 'bg-orange-400 animate-pulse' :
-              isSolving ? 'bg-green-400 animate-pulse' :
-              'bg-blue-400'
-            }`}></div>
-            {isScrambling ? 'Scrambling' : isSolving ? 'Solving' : 'Ready'}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Main VirtualCube component
-const VirtualCube = forwardRef(({ cubeData, onRecapture, onColorChange, currentMove: externalCurrentMove }, ref) => {
+const VirtualCube = forwardRef(({ cubeData, onColorChange, currentMove: externalCurrentMove }, ref) => {
   const [localCubeData, setLocalCubeData] = useState(cubeData || {});
   const [selectedSquare, setSelectedSquare] = useState(null);
   const [showColorPalette, setShowColorPalette] = useState(false);
@@ -1247,39 +1111,12 @@ const VirtualCube = forwardRef(({ cubeData, onRecapture, onColorChange, currentM
             />
           </Canvas>
           
-          {/* Overlay information */}
-          <div className="canvas-overlay">
-            <div className="overlay-item">
-              <span>🎥 Live Camera Data</span>
-            </div>
-            <div className="overlay-item">
-              <span>📷 Camera Capture Status:</span>
-              <div className="status-grid">
-                <span className={localCubeData.front ? 'status-captured' : 'status-missing'}>Front</span>
-                <span className={localCubeData.back ? 'status-captured' : 'status-missing'}>Back</span>
-                <span className={localCubeData.up ? 'status-captured' : 'status-missing'}>Up</span>
-                <span className={localCubeData.down ? 'status-captured' : 'status-missing'}>Down</span>
-                <span className={localCubeData.left ? 'status-captured' : 'status-missing'}>Left</span>
-                <span className={localCubeData.right ? 'status-captured' : 'status-missing'}>Right</span>
-              </div>
-            </div>
-          </div>
+
         </div>
 
         {/* Controls and Debug Panel */}
         <div className="controls-panel">
-          {/* Cube Controls */}
-          <CubeControls
-            onScramble={handleScramble}
-            onSolve={handleSolve}
-            onReset={handleReset}
-            onSpeedChange={handleSpeedChange}
-            isScrambling={isScrambling}
-            isSolving={isSolving}
-            animationSpeed={animationSpeed}
-            solvingMoves={solvingMoves}
-            currentMoveIndex={currentMoveIndex}
-          />
+
 
           {/* Face Visualizations */}
           <div className="face-visualizations">
@@ -1395,91 +1232,10 @@ const VirtualCube = forwardRef(({ cubeData, onRecapture, onColorChange, currentM
             </div>
 
             {/* Save Button */}
-            <div style={{
-              marginTop: '20px',
-              textAlign: 'center',
-              padding: '15px',
-              background: 'rgba(0, 0, 0, 0.2)',
-              borderRadius: '10px',
-              border: '1px solid rgba(255, 255, 255, 0.1)'
-            }}>
-              <button
-                onClick={() => {
-                  handleSaveFaces();
-                  testFaceMapping(); // Add this line
-                }}
-                style={{
-                  background: 'linear-gradient(45deg, #4caf50, #45a049)',
-                  color: 'white',
-                  border: 'none',
-                  padding: '12px 24px',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  boxShadow: '0 4px 15px rgba(76, 175, 80, 0.3)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-2px)';
-                  e.target.style.boxShadow = '0 6px 20px rgba(76, 175, 80, 0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 4px 15px rgba(76, 175, 80, 0.3)';
-                }}
-                title="Click to sync all face colors to the 3D virtual cube"
-              >
-                💾 Save & Sync to 3D Cube
-              </button>
-              <p style={{
-                marginTop: '8px',
-                fontSize: '12px',
-                color: '#4fc3f7',
-                opacity: '0.8'
-              }}>
-                Syncs all captured face colors to the 3D virtual cube
-              </p>
-            </div>
+
           </div>
 
-          {/* Debug Information */}
-          <div className="debug-section">
-            <h3>🔍 Debug Information</h3>
-            <div className="debug-data">
-              <div><strong>Front:</strong> {localCubeData.front ? '✅ Captured' : '❌ Not captured'}</div>
-              <div><strong>Back:</strong> {localCubeData.back ? '✅ Captured' : '❌ Not captured'}</div>
-              <div><strong>Up:</strong> {localCubeData.up ? '✅ Captured' : '❌ Not captured'}</div>
-              <div><strong>Down:</strong> {localCubeData.down ? '✅ Captured' : '❌ Not captured'}</div>
-              <div><strong>Left:</strong> {localCubeData.left ? '✅ Captured' : '❌ Not captured'}</div>
-              <div><strong>Right:</strong> {localCubeData.right ? '✅ Captured' : '❌ Not captured'}</div>
-            </div>
-            <div style={{ marginTop: '10px', fontSize: '10px', color: '#333' }}>
-              <strong>�� Captured Colors:</strong>
-              <div style={{ marginTop: '5px' }}>
-                {localCubeData.front?.colors && (
-                  <div>Front: {JSON.stringify(localCubeData.front.colors)}</div>
-                )}
-                {localCubeData.back?.colors && (
-                  <div>Back: {JSON.stringify(localCubeData.back.colors)}</div>
-                )}
-                {localCubeData.up?.colors && (
-                  <div>Up: {JSON.stringify(localCubeData.up.colors)}</div>
-                )}
-                {localCubeData.down?.colors && (
-                  <div>Down: {JSON.stringify(localCubeData.down.colors)}</div>
-                )}
-                {localCubeData.left?.colors && (
-                  <div>Left: {JSON.stringify(localCubeData.left.colors)}</div>
-                )}
-                {localCubeData.right?.colors && (
-                  <div>Right: {JSON.stringify(localCubeData.right.colors)}</div>
-                )}
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -1511,12 +1267,7 @@ const VirtualCube = forwardRef(({ cubeData, onRecapture, onColorChange, currentM
         </div>
       )}
 
-      {/* Recapture Button */}
-      <div className="recapture-section">
-        <button onClick={onRecapture} className="recapture-button">
-          📷 Recapture Cube
-        </button>
-      </div>
+
     </div>
   );
 });
