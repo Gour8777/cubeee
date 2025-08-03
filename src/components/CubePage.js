@@ -375,67 +375,13 @@ const CubePage = ({ cubeData, onBack }) => {
         ← Back
       </button>
 
-      {/* Difficulty Level Buttons - positioned on the right side */}
       <div style={{
         position: 'absolute',
         right: '20px',
         top: '50%',
         transform: 'translateY(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
         zIndex: 1000
       }}>
-        {['beginner', 'intermediate', 'advanced'].map((level) => (
-          <button
-            key={level}
-            onClick={() => handleDifficultyChange(level)}
-            disabled={isSolving}
-            style={{
-              padding: '10px 14px',
-              background: difficultyLevel === level 
-                ? 'rgba(255, 255, 255, 0.3)' 
-                : 'rgba(255, 255, 255, 0.1)',
-              color: 'white',
-              border: `1.5px solid ${difficultyLevel === level 
-                ? 'rgba(255, 255, 255, 0.5)' 
-                : 'rgba(255, 255, 255, 0.2)'}`,
-              borderRadius: '12px',
-              fontSize: '0.85rem',
-              fontWeight: '500',
-              cursor: isSolving ? 'not-allowed' : 'pointer',
-              transition: 'all 0.2s ease',
-              backdropFilter: 'blur(8px)',
-              textTransform: 'capitalize',
-              minWidth: '100px',
-              boxShadow: difficultyLevel === level 
-                ? '0 3px 8px rgba(255, 255, 255, 0.15)' 
-                : '0 1px 4px rgba(0, 0, 0, 0.1)',
-              letterSpacing: '0.5px',
-              opacity: isSolving ? 0.6 : 1
-            }}
-            onMouseEnter={(e) => {
-              if (difficultyLevel !== level && !isSolving) {
-                e.target.style.background = 'rgba(255, 255, 255, 0.2)';
-                e.target.style.borderColor = 'rgba(255, 255, 255, 0.35)';
-                e.target.style.transform = 'translateX(-2px)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (difficultyLevel !== level) {
-                e.target.style.background = 'rgba(255, 255, 255, 0.1)';
-                e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                e.target.style.transform = 'translateX(0)';
-              }
-            }}
-          >
-            {level === 'beginner' && '🌱 '}
-            {level === 'intermediate' && '⚡ '}
-            {level === 'advanced' && '🔥 '}
-            {level}
-          </button>
-        ))}
-        
         {/* Solve Button */}
         <button
           onClick={isSolving ? stopSolving : handleSolve}
@@ -456,8 +402,7 @@ const CubePage = ({ cubeData, onBack }) => {
             backdropFilter: 'blur(8px)',
             minWidth: '100px',
             boxShadow: '0 3px 8px rgba(0, 0, 0, 0.2)',
-            letterSpacing: '0.5px',
-            marginTop: '8px'
+            letterSpacing: '0.5px'
           }}
           onMouseEnter={(e) => {
             e.target.style.transform = 'translateX(-2px)';
@@ -470,8 +415,6 @@ const CubePage = ({ cubeData, onBack }) => {
         >
           {isSolving ? '🛑 Stop' : '▶️ Start'}
         </button>
-
-
       </div>
 
       {/* Solving Progress Indicator */}

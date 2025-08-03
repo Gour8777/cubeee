@@ -283,13 +283,7 @@ const Camera = ({ onCubeCaptured, captureProgress, setCaptureProgress }) => {
 
   return (
     <div className="camera-capture">
-      <div className="capture-header">
-        <h2 className="capture-title">Cube Face Capture</h2>
-        <div className="capture-status">
-          <span className="status-dot"></span>
-          <span>Ready to capture: {FACE_ORDER[currentFaceIndex]?.name || 'Loading...'}</span>
-        </div>
-      </div>
+
 
       <div className="capture-content">
         <div className="webcam-feed">

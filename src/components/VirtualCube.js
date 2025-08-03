@@ -1064,7 +1064,7 @@ const VirtualCube = forwardRef(({ cubeData, onColorChange, currentMove: external
   return (
     <div className="virtual-cube-container">
       <div className="header">
-        <h2>🎲 Virtual Rubik's Cube</h2>
+        <h2>CubeNav: Mission Aerospace</h2>
         <p>3D representation of your captured cube with interactive controls</p>
       </div>
 

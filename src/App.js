@@ -82,7 +82,7 @@ function AppContent() {
           <div className="app">
             <div className="app-header">
               <div className="app-title">
-                <h1>🎯 Rubik's Cube Capture System</h1>
+                <h1>CubeNav: Mission Aerospace</h1>
                 <p className="app-subtitle">Capture your physical cube and see it in 3D!</p>
               </div>
               
@@ -141,10 +141,7 @@ function AppContent() {
                     </div>
                   ) : (
                     <>
-                      <div style={{ padding: '20px', textAlign: 'center' }}>
-                        <h3>Cube Data Available</h3>
-                        <p>Faces captured: {Object.keys(capturedCubeData || {}).length}</p>
-                      </div>
+
                       <VirtualCube 
                         cubeData={capturedCubeData} 
                         onColorChange={(updatedCubeData) => setCapturedCubeData(updatedCubeData)}
