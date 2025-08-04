@@ -344,6 +344,21 @@ const CubePage = ({ cubeData, onBack }) => {
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       position: 'relative'
     }}>
+      <h1 style={{
+        position: 'absolute',
+        top: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        color: 'white',
+        fontSize: '2.2rem',
+        fontWeight: 700,
+        letterSpacing: '1px',
+        textShadow: '0 2px 8px rgba(0,0,0,0.25)',
+        zIndex: 2000,
+        margin: 0
+      }}>
+        Kosimba Algorithm
+      </h1>
       {/* Back button - positioned absolutely */}
       <button 
         style={{
